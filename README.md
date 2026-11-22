@@ -1,7 +1,7 @@
 # 腾讯 Marvis · magpie 供应商插件
 
-> **维护状态：已暂停维护。** 本仓库保持公开，安装与使用不受影响；不再跟进上游变化，不再更新版本。
-> 遇到问题可以先搜索已有 issue，但不保证有回复。
+> 从已暂停维护的 [MYCF711/magpie-marvis](https://github.com/MYCF711/magpie-marvis)（0.2.57，MIT）继续。
+> 2026-11-17 之后上游不再接受随机 uskey，这里用官方 `beacon_wrapper.dll` 按请求现签。
 
 > 非官方插件。Marvis 是腾讯的产品，本插件只是把它自己的模型网关接到 magpie 上，
 > 与腾讯无关。边界见下方「已知边界」。
@@ -69,7 +69,7 @@ Marvis 免费账号 **一个号每天 1000 万计费 token**（`total_tokens`）
 ## 装
 
 ```bash
-magpie plugin add MYCF711/magpie-marvis
+magpie plugin add github:facron2004/magpie-marvis-fix
 ```
 
 装完在 magpie 设置里 **供应商 → 添加 → 腾讯 Marvis**，选登录方式：

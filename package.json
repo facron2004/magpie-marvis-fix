@@ -74,12 +74,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MYCF711/magpie-marvis.git"
+    "url": "git+https://github.com/facron2004/magpie-marvis-fix.git"
   },
   "bugs": {
-    "url": "https://github.com/MYCF711/magpie-marvis/issues"
+    "url": "https://github.com/facron2004/magpie-marvis-fix/issues"
   },
-  "homepage": "https://github.com/MYCF711/magpie-marvis#readme",
+  "homepage": "https://github.com/facron2004/magpie-marvis-fix#readme",
   "optionsExample": {
     "_说明": "首行兜底：被上游内容过滤拦下时，把 system 首行换成不含任何 agent 产品名的句子重试一次。mode=off 只走内置白名单；blocked（默认）只在被拦后兜底；always 每个请求都换成 text。text 留空 = 内置兜底句 You are a helpful assistant.",
     "firstLine": {

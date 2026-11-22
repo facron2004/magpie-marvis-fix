@@ -24,6 +24,12 @@
   - `packages/workbuddy`（https://github.com/magpie-community/plugins/tree/main/packages/workbuddy）：
     refresh 单飞 / 短回放结构（`src/refresh-lock.mjs`）
 
+## magpie-marvis
+
+- 仓库：https://github.com/MYCF711/magpie-marvis
+- 许可：MIT
+- 本仓库在其 0.2.57 之上继续维护。协议、登录和模型目录来自该项目，0.2.58 起的 uskey 现签是这里加的。
+
 ## MYCF711 自有 MIT 插件
 
 - `magpie-magicrew-auth` — https://github.com/MYCF711/magpie-magicrew-auth
