@@ -20,3 +20,4 @@ native/*.exp
 native/*.obj
 native/qimei36.txt
 native/qimei.txt
+native/wx-appid

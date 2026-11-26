@@ -125,13 +125,20 @@ test("authorize 是 async 函数，且立刻返回（不 await 登录）", async
 })
 
 test("授权 URL 带对的 appid 与 redirect_uri", async () => {
-  const plugin = await MarvisAuthPlugin({})
-  const qq = await plugin.auth.methods[0].authorize(undefined)
-  assert.match(qq.url, /client_id=1903794758/)
-  assert.match(qq.url, /redirect_uri=https%3A%2F%2Fyybadaccess\.3g\.qq\.com%2Fmarvis_client_login%2Fmarvis_oauth/)
+  const prev = process.env.MARVIS_WX_APP_ID
+  process.env.MARVIS_WX_APP_ID = "wx-test-app"
+  try {
+    const plugin = await MarvisAuthPlugin({})
+    const qq = await plugin.auth.methods[0].authorize(undefined)
+    assert.match(qq.url, /client_id=1903794758/)
+    assert.match(qq.url, /redirect_uri=https%3A%2F%2Fyybadaccess\.3g\.qq\.com%2Fmarvis_client_login%2Fmarvis_oauth/)
 
-  const wx = await plugin.auth.methods[1].authorize(undefined)
-  assert.match(wx.url, /appid=wxb650708317d56f88/)
+    const wx = await plugin.auth.methods[1].authorize(undefined)
+    assert.match(wx.url, /appid=wx-test-app/)
+  } finally {
+    if (prev === undefined) delete process.env.MARVIS_WX_APP_ID
+    else process.env.MARVIS_WX_APP_ID = prev
+  }
 })
 
 test("loader() 给 baseURL / apiKey / fetch；未登录返回空对象", async () => {

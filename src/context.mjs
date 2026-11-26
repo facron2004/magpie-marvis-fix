@@ -30,9 +30,8 @@ export const BUSINESS_ID = "marvis_client"
 /** 业务接口签名用的 accessKey —— 明文硬编码在 Marvis 渲染层里，不是密钥 */
 export const ACCESS_KEY = "fpzkeTlcGLVP37qiOWd29MyaOqaJYxMi"
 
-/** QQ 互联 appid / 微信开放平台 appid（登录用） */
+/** QQ 互联 appid（登录用）。微信 appid 不写在源码里，见 login.mjs 的 wxAppId。 */
 export const QQ_APP_ID = "1903794758"
-export const WX_APP_ID = "wxb650708317d56f88"
 
 /**
  * 续期端点（**POST**，body 是 `{userInfo:{openId, refreshToken, accessToken, loginType}}`）。

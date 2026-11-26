@@ -16,11 +16,30 @@
 //   · 成功 → `302` + `Set-Cookie`（openid/accesstoken/refreshtoken/...），**不是 JSON**
 //   所以必须 `redirect: "manual"`，跟随 302 会把登录态丢掉。
 
-import { BASE, QQ_APP_ID, WX_APP_ID, BUSINESS_ID, LOGIN_TYPE } from "../context.mjs"
+import { existsSync, readFileSync } from "node:fs"
+import { dirname, join } from "node:path"
+import { fileURLToPath } from "node:url"
+import { BASE, QQ_APP_ID, BUSINESS_ID, LOGIN_TYPE } from "../context.mjs"
 import { ualSignature } from "./protocol.mjs"
 import { expiresAtOf, ttlFor } from "./expiry.mjs"
 import { createHash } from "node:crypto"
 import { createRequire } from "node:module"
+
+/**
+ * 微信开放平台 appid。不写进源码：环境变量优先，其次插件 native/wx-appid（不入库）。
+ * @returns {string}
+ */
+export function wxAppId() {
+  const fromEnv = String(process.env.MARVIS_WX_APP_ID ?? "").trim()
+  if (fromEnv) return fromEnv
+  const file = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "native", "wx-appid")
+  try {
+    if (existsSync(file)) return readFileSync(file, "utf8").trim()
+  } catch {
+    /* 读不到就当没配 */
+  }
+  return ""
+}
 
 const require = createRequire(import.meta.url)
 
@@ -44,8 +63,10 @@ const REDIRECT = `${BASE}/marvis_client_login/marvis_oauth`
  */
 export function authorizeUrl(loginType, guid) {
   if (loginType === "WX") {
+    const appid = wxAppId()
+    if (!appid) throw new Error("未配置微信 appid。设置环境变量 MARVIS_WX_APP_ID，或写入插件 native/wx-appid。")
     const p = new URLSearchParams({
-      appid: WX_APP_ID,
+      appid,
       // ⚠ 同样必须带 ?login_type=WX
       redirect_uri: `${REDIRECT}?login_type=${loginType}`,
       response_type: "code",
